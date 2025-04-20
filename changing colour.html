@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Color & Shade Picker</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      transition: background-color 0.3s ease;
+      font-family: Arial, sans-serif;
+    }
+
+    .buttons, .shades {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 1rem;
+    }
+
+    button {
+      padding: 0.8rem 1.2rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      color: white;
+      min-width: 100px;
+    }
+
+    select {
+      padding: 0.5rem;
+      font-size: 1rem;
+      margin-top: 1rem;
+    }
+
+    .red { background-color: red; }
+    .green { background-color: green; }
+    .blue { background-color: blue; }
+    .yellow { background-color: goldenrod; }
+    .purple { background-color: purple; }
+    .random { background-color: #333; }
+  </style>
+</head>
+<body>
+  <h2>Pick a Color</h2>
+  <div class="buttons">
+    <button class="red" onclick="selectColor('red')">Red</button>
+    <button class="green" onclick="selectColor('green')">Green</button>
+    <button class="blue" onclick="selectColor('blue')">Blue</button>
+    <button class="yellow" onclick="selectColor('yellow')">Yellow</button>
+    <button class="purple" onclick="selectColor('purple')">Purple</button>
+    <button class="random" onclick="changeColor(getRandomColor())">Random</button>
+  </div>
+
+  <div class="shades" id="shadeSelector" style="display: none;">
+    <select id="shadeDropdown" onchange="applyShade()">
+      <!-- Shade options will be added dynamically -->
+    </select>
+  </div>
+
+  <script>
+    const shades = {
+      red: ['#FFCCCC', '#FF6666', '#CC0000', '#990000'],
+      green: ['#CCFFCC', '#66FF66', '#009900', '#006600'],
+      blue: ['#CCE5FF', '#3399FF', '#0066CC', '#003366'],
+      yellow: ['#FFFFCC', '#FFEB3B', '#FFD700', '#B8860B'],
+      purple: ['#E6CCFF', '#B266FF', '#800080', '#4B0082'],
+    };
+
+    let currentColor = '';
+
+    function selectColor(color) {
+      currentColor = color;
+      const dropdown = document.getElementById('shadeDropdown');
+      dropdown.innerHTML = ''; // Clear old options
+
+      if (shades[color]) {
+        document.getElementById('shadeSelector').style.display = 'block';
+
+        shades[color].forEach((shade, index) => {
+          const option = document.createElement('option');
+          option.value = shade;
+          option.text = `Shade ${index + 1}`;
+          dropdown.appendChild(option);
+        });
+
+        changeColor(shades[color][0]); // Default to first shade
+      } else {
+        document.getElementById('shadeSelector').style.display = 'none';
+        changeColor(color);
+      }
+    }
+
+    function applyShade() {
+      const selectedShade = document.getElementById('shadeDropdown').value;
+      changeColor(selectedShade);
+    }
+
+    function changeColor(color) {
+      document.body.style.backgroundColor = color;
+    }
+
+    function getRandomColor() {
+      const letters = '0123456789ABCDEF';
+      let color = '#';
+      for (let i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+      }
+      document.getElementById('shadeSelector').style.display = 'none';
+      return color;
+    }
+  </script>
+</body>
+</html>
