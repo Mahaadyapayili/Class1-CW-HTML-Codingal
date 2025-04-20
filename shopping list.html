@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Shopping List with Check & Delete</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f4f4f4;
+      padding: 40px;
+      max-width: 500px;
+      margin: auto;
+    }
+
+    h1 {
+      color: #333;
+      text-align: center;
+    }
+
+    input[type="text"] {
+      width: 60%;
+      padding: 10px;
+      font-size: 16px;
+      border: 2px solid #ccc;
+      border-radius: 8px;
+      transition: 0.3s;
+    }
+
+    input[type="text"]:focus {
+      outline: none;
+      border-color: #5c9ded;
+      box-shadow: 0 0 8px rgba(92, 157, 237, 0.5);
+    }
+
+    button {
+      padding: 10px 15px;
+      font-size: 16px;
+      margin-left: 10px;
+      background-color: #5c9ded;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background-color: #417cd6;
+    }
+
+    ul {
+      margin-top: 25px;
+      padding-left: 0;
+    }
+
+    li {
+      font-size: 18px;
+      margin: 12px 0;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      opacity: 0;
+      animation: fadeIn 0.5s forwards;
+      transition: 0.3s;
+      background: #fff;
+      padding: 10px 15px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .left {
+      display: flex;
+      align-items: center;
+    }
+
+    li input[type="checkbox"] {
+      margin-right: 12px;
+      transform: scale(1.2);
+    }
+
+    li.checked span {
+      text-decoration: line-through;
+      color: #888;
+    }
+
+    .delete-btn {
+      background-color: transparent;
+      border: none;
+      color: #e74c3c;
+      font-size: 18px;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+
+    .delete-btn:hover {
+      color: #c0392b;
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>🛒 My Shopping List</h1>
+
+  <div>
+    <input type="text" id="itemInput" placeholder="Enter an item">
+    <button onclick="addItem()">Add Item</button>
+  </div>
+
+  <ul id="shoppingList"></ul>
+
+  <script>
+    function addItem() {
+      const input = document.getElementById("itemInput");
+      const itemText = input.value.trim();
+
+      if (itemText !== "") {
+        const li = document.createElement("li");
+
+        const leftDiv = document.createElement("div");
+        leftDiv.className = "left";
+
+        const checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.onclick = () => {
+          li.classList.toggle("checked");
+        };
+
+        const span = document.createElement("span");
+        span.textContent = itemText;
+
+        const deleteBtn = document.createElement("button");
+        deleteBtn.className = "delete-btn";
+        deleteBtn.innerHTML = "🗑️";
+        deleteBtn.onclick = () => {
+          li.remove();
+        };
+
+        leftDiv.appendChild(checkbox);
+        leftDiv.appendChild(span);
+        li.appendChild(leftDiv);
+        li.appendChild(deleteBtn);
+
+        document.getElementById("shoppingList").appendChild(li);
+
+        input.value = "";
+        input.focus();
+      }
+    }
+  </script>
+</body>
+</html>
