@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Simple Calendar</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      padding: 2rem;
+    }
+    .calendar {
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      overflow: hidden;
+      width: 300px;
+    }
+    .calendar-header {
+      background-color: #f4f4f4;
+      padding: 1rem;
+      text-align: center;
+      font-weight: bold;
+    }
+    .day-names, .days {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+    }
+    .day-names div, .days div {
+      padding: 10px;
+      text-align: center;
+    }
+    .day-names {
+      background-color: #e9e9e9;
+      font-weight: bold;
+    }
+    .days div {
+      border: 1px solid #ddd;
+    }
+  </style>
+</head>
+<body>
+  <div class="calendar">
+    <div class="calendar-header" id="month-year"></div>
+    <div class="day-names">
+      <div>Sun</div>
+      <div>Mon</div>
+      <div>Tue</div>
+      <div>Wed</div>
+      <div>Thu</div>
+      <div>Fri</div>
+      <div>Sat</div>
+    </div>
+    <div class="days" id="calendar-days"></div>
+  </div>
+
+  <script>
+    const calendarDays = document.getElementById("calendar-days");
+    const monthYear = document.getElementById("month-year");
+
+    const today = new Date();
+    const currentMonth = today.getMonth();
+    const currentYear = today.getFullYear();
+
+    const monthNames = [
+      "January", "February", "March", "April", "May", "June",
+      "July", "August", "September", "October", "November", "December"
+    ];
+
+    function generateCalendar(month, year) {
+      const firstDay = new Date(year, month, 1).getDay();
+      const totalDays = new Date(year, month + 1, 0).getDate();
+
+      monthYear.textContent = `${monthNames[month]} ${year}`;
+
+      calendarDays.innerHTML = "";
+
+      // Add empty slots for the first week
+      for (let i = 0; i < firstDay; i++) {
+        const emptyDiv = document.createElement("div");
+        calendarDays.appendChild(emptyDiv);
+      }
+
+      // Add actual days
+      for (let i = 1; i <= totalDays; i++) {
+        const dayDiv = document.createElement("div");
+        dayDiv.textContent = i;
+        calendarDays.appendChild(dayDiv);
+      }
+    }
+
+    generateCalendar(currentMonth, currentYear);
+  </script>
+</body>
+</html>
