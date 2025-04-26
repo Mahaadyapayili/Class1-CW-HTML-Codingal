@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hyderabad Tourism</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #e0f7fa; /* Light blue background for the entire page */
+        }
+
+        /* Navbar styling */
+        .navbar {
+            background-color: #99fdd7; /* Soft green background for the navbar */
+            display: flex;
+            align-items: center;
+            padding: 10px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+            margin-right: 40px;
+        }
+
+        .menu a {
+            text-decoration: none;
+            color: pink;
+            font-size: 18px;
+            margin-right: 20px;
+            padding: 8px 12px;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+            cursor: pointer;
+        }
+
+        .menu a:hover, .menu a.active {
+            background-color: #86cef2; /* Light blue hover effect for menu */
+            color: white;
+        }
+
+        /* Tabs styling */
+        .tab-content {
+            display: none;
+            padding: 50px 20px;
+            text-align: center;
+            animation: fadeEffect 1s;
+            background-color: #ffffff; /* White background for each tab */
+            border-radius: 10px;
+            margin: 20px;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeEffect {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .tab-content img {
+            width: 30%;
+            max-width: 400px;
+            height: auto;
+            margin: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .tab-content h1 {
+            font-size: 36px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .tab-content p {
+            font-size: 18px;
+            color: #555;
+            max-width: 800px;
+            margin: 10px auto;
+            line-height: 1.6;
+        }
+
+        .images-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <div class="navbar">
+        <div class="logo">Hyderabad Tourism</div>
+        <div class="menu">
+            <a class="tablink active" onclick="openTab('home', event)">Home</a>
+            <a class="tablink" onclick="openTab('about', event)">About Hyderabad</a>
+            <a class="tablink" onclick="openTab('places', event)">Places to Visit</a>
+            <a class="tablink" onclick="openTab('contact', event)">Contact Us</a>
+        </div>
+    </div>
+
+    <!-- Tab Contents -->
+    <div id="home" class="tab-content active">
+        <h1>Welcome to Hyderabad</h1>
+        <p>Experience the city of Pearls, Nizams, and Technology! A perfect blend of rich history and vibrant modern life.</p>
+        <div class="images-container">
+            <img src="charminar-hyderabad-andhra-pradesh-india-D8J0FH.jpg" alt="Charminar">
+            <img src="OIP.jpg" alt="Hyderabad Technology">
+        </div>
+    </div>
+
+    <div id="about" class="tab-content">
+        <h1>About Hyderabad</h1>
+        <div class="images-container">
+            <img src="charminar-hyderabad-andhra-pradesh-india-D8J0FH.jpg" alt="Charminar Hyderabad">
+            <img src="OIP1.jpg" alt="Golconda Fort">
+            <img src="OIP (2).jpg" alt="Salar Jung Museum">
+        </div>
+        <p>Hyderabad, the capital of Telangana, is a city rich in culture, history, and modernity. Known as the "City of Pearls" and "City of Nizams", it beautifully blends tradition with technology.</p>
+        <p>Famous landmarks include the Charminar, Golconda Fort, and Hussain Sagar Lake. Hyderabad is also famous for its delicious Biryani and IT hubs like Cyberabad.</p>
+    </div>
+
+    <div id="places" class="tab-content">
+        <h1>Places to Visit</h1>
+        <div class="images-container">
+            <img src="OIP1.jpg" alt="Golconda Fort Hyderabad">
+            <img src="download.jpg" alt="Ramoji Film City">
+            <img src="download (1).jpg" alt="Hussain Sagar Lake">
+        </div>
+        <p>Explore amazing attractions like:</p>
+        <p>⭐ Charminar<br>⭐ Golconda Fort<br>⭐ Ramoji Film City<br>⭐ Hussain Sagar Lake<br>⭐ Salar Jung Museum<br>⭐ Chowmahalla Palace</p>
+    </div>
+
+    <div id="contact" class="tab-content">
+        <h1>Contact Us</h1>
+        <p>Email: info@hyderabadtourism.com</p>
+        <p>Phone: +91 98765 43210</p>
+        <p>Address: Hyderabad, Telangana, India</p>
+    </div>
+
+    <!-- JavaScript for Tabs -->
+    <script>
+        function openTab(tabName, event) {
+            var i, tabcontent, tablinks;
+
+            // Hide all tab contents
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+                tabcontent[i].classList.remove("active");
+            }
+
+            // Remove "active" class from all tab links
+            tablinks = document.getElementsByClassName("tablink");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].classList.remove("active");
+            }
+
+            // Show current tab and add "active" class
+            document.getElementById(tabName).style.display = "block";
+            document.getElementById(tabName).classList.add("active");
+
+            event.currentTarget.classList.add("active");
+        }
+    </script>
+
+</body>
+</html>
