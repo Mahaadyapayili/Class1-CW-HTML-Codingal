@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            body{
+                margin :0%;
+                font-family:'Times New Roman', Times, serif;
+                background-color: aquamarine;
+            }
+
+            .Navbar{
+                background-color: aqua;
+                display:flex;
+                align-items: flex-start;
+                padding: 10px;
+                position: initial;
+            }
+
+            .logo {
+            font-size: 22px;
+            font-weight: bold;
+            margin-right: 40px;
+        }
+
+        .menu a {
+            text-decoration: none;
+            color: pink;
+            font-size: 18px;
+            margin-right: 20px;
+            padding: 8px 12px;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+            cursor: pointer;
+        }
+
+        .menu a:hover, .menu a.active {
+            background-color: #86cef2; /* Light blue hover effect for menu */
+            color: white;
+        }
+
+        /* Tabs styling */
+        .tab-content {
+            display: none;
+            padding: 50px 20px;
+            text-align: center;
+            animation: fadeEffect 1s;
+            background-color: #ffffff; /* White background for each tab */
+            border-radius: 10px;
+            margin: 20px;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeEffect {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .tab-content img {
+            width: 30%;
+            max-width: 400px;
+            height: auto;
+            margin: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .tab-content h1 {
+            font-size: 36px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .tab-content p {
+            font-size: 18px;
+            color: #555;
+            max-width: 800px;
+            margin: 10px auto;
+            line-height: 1.6;
+        }
+
+        .images-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        </style>
+    </head>
+    <body>
+         <!-- Navbar -->
+    <div class="navbar">
+        <div class="logo">Food court</div>
+        <div class="menu">
+            <a class="tablink active" onclick="openTab('home', event)">Home</a>
+            <a class="tablink" onclick="openTab('about', event)">About Hyderabad</a>
+            <a class="tablink" onclick="openTab('places', event)">Places to Visit</a>
+            <a class="tablink" onclick="openTab('contact', event)">Contact Us</a>
+        </div>
+    </div>
+
+    <!-- Tab Contents -->
+    <div id="home" class="tab-content active">
+        <h1>Welcome to our Food Court</h1>
+        <p>You can find variety of items here. </p>
+        <div class="images-container">
+            <img src="download.webp" alt="Food">
+            
+            <div id="Order Food" class="tab-content">
+                <h1>About Hyderabad</h1>
+                <div class="images-container">
+                    <img src="OIP.webp" alt="Biryani">
+                    <img src="OIP (1).webp" alt="Paani Poori">
+                    <img src="OIP (2).webp" alt="Chaat">
+                    <img src="OIP (2).webp" alt="Chicken magnet">
+                </div>
+                <p>Order your food,Get it delivered,Enjoy your food</p>
+
+                <div id="contact" class="tab-content">
+                    <h1>Contact Us</h1>
+                    <p>Email: FoodCourt@gmail.com</p>
+                    <p>Phone: +91 98765 43210</p>
+                    <p>Address: Hyderabad, Telangana, India</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openTab(tabName, event) {
+            var i, tabcontent, tablinks;
+
+            // Hide all tab contents
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+                tabcontent[i].classList.remove("active");
+            }
+
+            // Remove "active" class from all tab links
+            tablinks = document.getElementsByClassName("tablink");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].classList.remove("active");
+            }
+
+            // Show current tab and add "active" class
+            document.getElementById(tabName).style.display = "block";
+            document.getElementById(tabName).classList.add("active");
+
+            event.currentTarget.classList.add("active");
+        }
+    </script>
+    </body>
+</html>
