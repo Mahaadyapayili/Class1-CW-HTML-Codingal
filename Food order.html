@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>QuickEats Order</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      max-width: 600px;
+      margin: auto;
+      padding: 20px;
+      background: linear-gradient(to right, #fefcea, #f1da36);
+      animation: fadeIn 1s ease-in;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h1 {
+      text-align: center;
+      color: #d35400;
+      font-size: 2.5em;
+      margin-bottom: 10px;
+    }
+
+    fieldset {
+      border: 2px solid #e67e22;
+      border-radius: 10px;
+      padding: 15px;
+      margin-bottom: 15px;
+      background-color: #fff8e7;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    label {
+      display: block;
+      margin: 8px 0;
+      font-size: 1.1em;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      padding: 5px;
+      border-radius: 5px;
+    }
+
+    input[type="submit"] {
+      background-color: #e67e22;
+      color: white;
+      padding: 10px 25px;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.1em;
+      cursor: pointer;
+      transition: transform 0.2s ease, background-color 0.3s ease;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #d35400;
+      transform: scale(1.05);
+    }
+
+    #total {
+      font-weight: bold;
+      font-size: 1.3em;
+      margin-top: 10px;
+      color: #c0392b;
+    }
+
+    textarea, input[type="text"], input[type="tel"] {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      box-sizing: border-box;
+    }
+
+    #confirmation {
+      display: none;
+      text-align: center;
+      font-size: 1.4em;
+      color: green;
+      margin-top: 30px;
+      animation: fadeIn 1.2s ease-in;
+    }
+  </style>
+</head>
+<body>
+  <h1>QuickEats 🇮🇳</h1>
+
+  <form id="orderForm">
+    <fieldset>
+      <legend>Select Your Food</legend>
+
+      <!-- Snacks -->
+      <label><input type="checkbox" name="food" value="20" onchange="updateTotal()"> 🥟 Samosa - ₹20</label>
+      <label><input type="checkbox" name="food" value="60" onchange="updateTotal()"> 🍟 French Fries - ₹60</label>
+
+      <!-- Mains -->
+      <label><input type="checkbox" name="food" value="100" onchange="updateTotal()"> 🍔 Burger - ₹100</label>
+      <label><input type="checkbox" name="food" value="150" onchange="updateTotal()"> 🍕 Pizza - ₹150</label>
+      <label><input type="checkbox" name="food" value="120" onchange="updateTotal()"> 🍝 Pasta - ₹120</label>
+      <label><input type="checkbox" name="food" value="80" onchange="updateTotal()"> 🥗 Salad - ₹80</label>
+
+      <!-- Beverages -->
+      <label><input type="checkbox" name="food" value="20" onchange="updateTotal()"> 🍵 Tea - ₹20</label>
+      <label><input type="checkbox" name="food" value="30" onchange="updateTotal()"> ☕ Coffee - ₹30</label>
+      <label><input type="checkbox" name="food" value="25" onchange="updateTotal()"> 🥤 Cold Drink - ₹25</label>
+
+      <div id="total">Total: ₹0</div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Your Details</legend>
+      <label>Name: <input type="text" id="name" required></label>
+      <label>Address: <textarea id="address" rows="3" required></textarea></label>
+      <label>Phone: <input type="tel" id="phone" required></label>
+    </fieldset>
+
+    <input type="submit" value="Place Order">
+  </form>
+
+  <div id="confirmation">✅ Thank you! Your order is being prepared and will be delivered soon...</div>
+
+  <script>
+    function updateTotal() {
+      const checkboxes = document.querySelectorAll('input[name="food"]:checked');
+      let total = 0;
+      checkboxes.forEach(cb => total += parseFloat(cb.value));
+      document.getElementById('total').textContent = "Total: ₹" + total;
+    }
+
+    document.getElementById('orderForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const name = document.getElementById('name').value.trim();
+      const address = document.getElementById('address').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+
+      if (!name || !address || !phone) {
+        alert("Please fill in all required fields.");
+        return;
+      }
+
+      this.style.display = "none";
+      document.getElementById('confirmation').style.display = "block";
+    });
+
+    updateTotal();
+  </script>
+</body>
+</html>
